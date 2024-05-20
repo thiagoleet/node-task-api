@@ -51,9 +51,9 @@ export const routes = [
     handler: (req, res) => {
       const { id } = req.params;
 
-      database.delete(context, id);
+      const found = database.delete(context, id);
 
-      return res.writeHead(204).end();
+      return res.writeHead(found ? 204 : 404).end();
     },
   },
   {
@@ -79,7 +79,7 @@ export const routes = [
         updated_at: new Date(),
       });
 
-      return res.writeHead(task ? 200 : 204).end(JSON.stringify(task));
+      return res.writeHead(task ? 200 : 404).end(JSON.stringify(task));
     },
   },
   {
@@ -93,7 +93,7 @@ export const routes = [
         updated_at: new Date(),
       });
 
-      return res.writeHead(task ? 200 : 204).end(JSON.stringify(task));
+      return res.writeHead(task ? 200 : 404).end(JSON.stringify(task));
     },
   },
 ];
