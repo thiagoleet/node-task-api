@@ -23,14 +23,12 @@ export const routes = [
       const { title, description } = req.body;
 
       if (!title || !description) {
-        return res
-          .writeHead(400)
-          .end(
-            JSON.stringify({
-              error:
-                "Título e descrição são obrigatórios para a criação de uma tarefa",
-            })
-          );
+        return res.writeHead(400).end(
+          JSON.stringify({
+            error:
+              "Título e descrição são obrigatórios para a criação de uma tarefa",
+          })
+        );
       }
 
       const task = {
@@ -65,6 +63,15 @@ export const routes = [
     handler: (req, res) => {
       const { id } = req.params;
       const { title, description } = req.body;
+
+      if (!title || !description) {
+        return res.writeHead(400).end(
+          JSON.stringify({
+            error:
+              "Título e descrição são obrigatórios para a atualização de uma tarefa",
+          })
+        );
+      }
 
       const task = database.update(context, id, {
         title,
