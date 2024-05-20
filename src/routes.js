@@ -21,6 +21,18 @@ export const routes = [
     path: buildRoutePath(`/${context}`),
     handler: (req, res) => {
       const { title, description } = req.body;
+
+      if (!title || !description) {
+        return res
+          .writeHead(400)
+          .end(
+            JSON.stringify({
+              error:
+                "Título e descrição são obrigatórios para a criação de uma tarefa",
+            })
+          );
+      }
+
       const task = {
         id: randomUUID(),
         title,
